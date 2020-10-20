@@ -1,0 +1,1 @@
+ISSUE: if we have more than 3 active topics it blocks all async operations

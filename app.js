@@ -4,6 +4,7 @@ const path = require('path');
 const fs = require('fs');
 const app = express();
 const Pulsar = require("pulsar-client");
+const swapi = require('swapi-node');
 const { readFileSync } = require('fs');
 
 app.use(express.json());
@@ -125,11 +126,33 @@ function handler(msg){
 subscribePulsar("test1", handler);
 subscribePulsar("test2", handler);
 subscribePulsar("test3", handler);
-subscribePulsar("test4", handler);
-subscribePulsar("test5", handler);
+// subscribePulsar("test4", handler);
+// subscribePulsar("test5", handler);
 
+// setTimeout(()=>{
+//     console.log('LALALA');
+// }, 1000)
+
+let counter = 0
 setInterval(() => {
-    console.log('MS', fs.readdirSync('./'));
-    
-}, 1000);
+    // console.log('MS', fs.readdirSync('./'));
+    const p = new Promise((resolve, reject)=>{
+        if(typeof "someone's name" === "string") {
+            resolve('SUCCESS')
+        } else {
+            reject('Fail')
+        }
+    }).then((data)=>{
+        console.log(data);
+    })
+    var original = Promise.resolve(true);
+    var cast = Promise.resolve(original);
+    cast.then(function(v) {
+    console.log(v); // true
 
+    swapi.get('https://swapi.dev/api/people/?page=2').then((res)=>{
+        console.log(res);
+    })
+    console.log(`-------------------------${counter++}----------------------------`);
+});
+}, 1000);
